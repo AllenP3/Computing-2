@@ -15,6 +15,24 @@ class Car {
     int year;
 };
 
+class FuncTest {
+    public:
+
+    void Method(){
+        cout << "Test Function";
+    }
+};
+
+class paraFunc{
+    public:
+     int speed(int maxspeed);
+};
+
+int paraFunc::speed(int maxspeed){
+    return maxspeed;
+}
+
+
 int main(){
 
     /*MyClass myObj;
@@ -26,7 +44,7 @@ int main(){
     cout << myObj.myString;
     return 0;*/
 
-    Car carobj1;
+    /*Car carobj1;
     carobj1.brand = "BMW";
     carobj1.model = "X5";
     carobj1.year = 1999;
@@ -42,5 +60,16 @@ int main(){
     cout << carobj2.model <<endl;
     cout << carobj2.brand <<endl;
     cout << carobj2.year <<endl;
+
+    return 0;*/
+
+    /*FuncTest test;
+    test.Method();
+
+    return 0;*/
+
+    paraFunc myObj;
+    cout << myObj.speed(200);
+    return 0;
     
 }
