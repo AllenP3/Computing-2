@@ -33,8 +33,9 @@ int main(){
     cout << "Initital course name: "<<my_grade_book.course_name();
 
     cout << "\nPlease enter the course name: ";
-    cin >> course_name;
+    getline(cin, course_name);
     my_grade_book.set_course_name(course_name);
+    
     my_grade_book.DisplayMessage();
     return 0;
     
