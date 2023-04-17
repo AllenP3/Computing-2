@@ -91,7 +91,7 @@ int main(){
 
 
 
-*/
+
 
 class Date{
 
@@ -106,3 +106,9 @@ std::istream& operator >> (std::istream& input, Date& y){
     input >> y.year;
     return input;
 }
+
+std::ostream& operator<<(std::ostream& out, const Date& a){
+    out <<a.date << '.' << a.month << '.' << a.year;
+    return out;
+}
+*/
