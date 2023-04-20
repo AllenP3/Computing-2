@@ -111,4 +111,86 @@ std::ostream& operator<<(std::ostream& out, const Date& a){
     out <<a.date << '.' << a.month << '.' << a.year;
     return out;
 }
+
+
+~~~~~ Overloading arithmetic operators when calculating 2 objects !!! ~~~~~
+- Using a friend function
+//A friend function takes in 2 inputs
+
+Animal operator + (Animal a, Animal b){
+    Animal temp;
+    temp.weight = a.weight + b.weight;
+    return temp;
+}
+Animal operator - (Animal a, Animal b){
+    Animal temp;
+    temp.weight = a.weight - b.weight;
+    return temp;
+}
+
+- Using a class member function
+- Using a global function
+
+//this only takes in 1 input
+Animal Animal::operator + (Amimal a){
+    Animal temp;
+    temp.weight = weight + a.weight;
+    return temp;
+}
+
+Animal Animal::operator - (Amimal a){
+    Animal temp;
+    temp.weight = weight - a.weight;
+    return temp;
+}
+
+
+Animal operator + (Animal a, Animal b){
+    Animal temp;
+    temp.setWeight(a.getWeight() + b.getWeight());
+    return temp;
+}
+
+Animal operator - (Animal a, Animal b){
+    Animal temp;
+    temp.setWeight(a.getWeight() - b.getWeight());
+    return temp;
+}
+
+
+class Animal{
+    friend void petAnimal();
+    friend Animal operator + (Animal a, Animal b);
+    friend Animal operator - (Animal a, Animal b);
+    public:
+        string getName();
+        void Animal();
+        Animal operator+(Animal a);
+        Animal operator-(Animal a);
+        Animal operator*(Animal a);
+
+    private:
+        string name;
+};
+
+Animal Animal::operator-(Animal a){
+    Animal x;
+    x.weight = weight + a.weight;
+    return x;
+}
+
+Animal operator *(Animal a, Animal b){
+    Animal temp;
+    temp.weight = a.weight + b.weight;
+    return temp;
+}
+
+
+int main(){
+    Animal dogAce = Animal("Ace", "dog", 2.5);
+    Animal catTom = Animal("Tom", "cat", 2.5);
+    Animal fishNemo = dogAce + catTom + jellyfish;
+    Animal camelJohn = dogAce - catTom;
+}
+
 */
