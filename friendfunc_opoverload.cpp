@@ -1,9 +1,4 @@
-// constructors are usually implicitly called when an object is created
-// for more control, we can explicitly call a constructor
-// a constructor has the same name as the class and no return type
-
-// destructors are called when an object is destroyed
-// a destructor has the same name as the class but with a ~ in front of it and no return type
+// operator overloading with friend functions
 
 #include <iostream>
 #include <vector>
@@ -18,7 +13,8 @@ class User{
         string get_status(){
             return status;      // status is accessible within the struct, just not outside of it
         }
-        User(string first_name, string last_name, string status){
+        
+       User(string first_name, string last_name, string status){
             cout << "Constructor" << endl; // this is the constructor
             this->first_name = first_name;      // this refers to the variable up top
             this->last_name = last_name;
@@ -27,7 +23,13 @@ class User{
         ~User(){
             cout << "Destructor" << endl;
         }
+        friend void output_status(User user);
+        friend std::istream& operator >> (std::istream& input, User &user);
 };
+
+void output_status(User user){
+    cout << user.status << endl;
+}
 
 int add_user(vector<User> &users, User user){
     for(int i = 0; i < users.size(); i++){
@@ -39,9 +41,22 @@ int add_user(vector<User> &users, User user){
     return users.size() - 1;
 
 }
+
+std::ostream& operator << (std::ostream& output, User user){
+    output << "First name: " << user.first_name << "\nLast name: " << user.last_name;
+    output << "\nStatus: " << user.get_status();
+    return output;
+}
+std::istream& operator >> (std::istream& input, User &user){
+    input >> user.first_name >> user.last_name >> user.status;
+    return input;
+}
+
 int main(){
-   // User me;  wont work as we have a constructor now
     User user("Allen", "Prasad", "Platinum");
-    cout <<user.first_name << endl;
-    return 0;
+    //cout << user.status; // this isnt allowed as status is private
+    output_status(user);
+    cin >> user;
+    output_status(user);
+
 }
